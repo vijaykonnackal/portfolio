@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group 'com.konnackal.aptos'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.9'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
+
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+}
+
+task testMain(type: Test) {
+    useJUnitPlatform {
+        includeTags 'main'
+    }
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+test {
+    useJUnitPlatform {
+        excludeTags 'slow'
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
